@@ -3,14 +3,10 @@ package day6;
 public class Task3 {
     public static void main(String[] args) {
 
+        Teacher teacher = new Teacher("Иван Петрович", "информатика");
+        Student student = new Student("Иванов Сергей");
 
-        Airplane airplane = new Airplane("Boeing", 2018, 25, 120);
-
-        System.out.println(airplane.fillUp(30));
-
-        System.out.println(airplane.fillUp(25));
-
-        airplane.info();
+        teacher.evaluate(student);
 
     }
 }
