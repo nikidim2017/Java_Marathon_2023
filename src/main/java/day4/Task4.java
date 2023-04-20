@@ -16,18 +16,19 @@ public class Task4 {
         int sum3 = 0;
         int maxSum = 0;
         int index = 0;
-        int j = 0;
+
         int groupSize = 3; // Количество элементов в группе
 
-        for (int i = 0; i < numbers.length - j; i++) { // элементы в группе суммируются через цикл
-            while (j < groupSize) {
-                sum3 = numbers[i + j];
-                j++;
+        for (int i = 0; i < numbers.length - groupSize - 1; i++) { // элементы в группе суммируются через цикл
+            sum3 = 0;
+            for (int j = 0; j < groupSize; j++) {
+                sum3 += numbers[i + j];
             }
+
             if (sum3 > maxSum) {
                 maxSum = sum3;
+                index = i;
             }
-            index = i;
         }
         System.out.println("Максимальная сумма: " + maxSum);
         System.out.println("Индекс: " + index);
