@@ -2,12 +2,11 @@ package day14;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
-        File file = new File("day14_1");
+        File file = new File("day141");
         printSumDigits(file);
     }
 
@@ -16,38 +15,42 @@ public class Task1 {
         Scanner sc = null;
         try {
             sc = new Scanner(file);
+
+            String line = sc.nextLine();
+            String[] stringNumbers = line.split("\\s+");
+
+            int[] numbers = new int[30];
+
+            int i = 0;
+            while (i < stringNumbers.length) {
+                numbers[i] = Integer.parseInt(stringNumbers[i].replaceAll("[^-]\\D", ""));
+                i++;
+            }
+            if (i != 10) {              // проверяем количество цифр в новом массиве типа int, в котором устранены лишние пробелы и запятые
+                throw new IllegalArgumentException();
+            }
+
+            int sum = 0;
+            for (int num : numbers) {
+                sum += num;
+            }
+            System.out.println(sum);
+
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
-        }
-
-        String line = sc.nextLine();
-        String[] stringNumbers = line.split("\\s+");
-
-        if (stringNumbers.length != 10) {           // проверяем файл на количество цифр и выбрасываем исключение
-            try {
-                throw new IOException();
-            } catch (IOException e) {
-                System.out.println("Некорректный входной файл");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Некорректный входной файл");
+        } finally {
+            if (sc != null) {
+                sc.close();
             }
         }
-
-        int sum = 0;
-        int[] numbers = new int[15];
-        int i = 0;
-
-        for (String num : stringNumbers) {
-            numbers[i] = Integer.parseInt(num.replaceAll("[^-]\\D", ""));
-            i++;
-        }
-
-        for (int number : numbers) {
-            sum += number;
-        }
-        System.out.println(sum);
-
-        sc.close();
     }
 }
+
+
+
+
 
 
 
