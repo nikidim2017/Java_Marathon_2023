@@ -1,11 +1,13 @@
 package day14;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.io.File;
 
 public class Task3 {
     public static void main(String[] args) {
+
         File file = new File("day14_3");
         System.out.println(parseFileToObjList(file));
     }
@@ -14,12 +16,16 @@ public class Task3 {
 
         List<Person> persons = new ArrayList<>();
         Scanner sc = null;
-
         try {
             sc = new Scanner(file);
-            List<String> nameAge = new ArrayList<>();
-            String line;
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден");
+        }
 
+        List<String> nameAge = new ArrayList<>();
+        String line = " ";
+
+        if (sc != null) {
             while (sc.hasNextLine()) {
                 line = sc.nextLine();
                 nameAge.addAll(Arrays.asList(line.split("\\s+")));   // преобразуем текст файла в массив строк
@@ -30,20 +36,16 @@ public class Task3 {
                 persons.add(person);
             }
 
-            for (Person p : persons) {                                   // проверяем возвраст на отрицательное значение
-                if (p.getYear() < 0) {
-                    throw new IllegalArgumentException();
-                }
-            }
 
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Некорректный входной файл");
-          persons = new ArrayList<>();
-        } finally {
-            if (sc != null){
-                sc.close();
+            for (Person p : persons) {        // проверяем возвраст на отрицательное значение
+                if (p.getYear() < 0) {
+                    try {
+                        throw new IOException();
+                    } catch (IOException e) {
+                        System.out.println("Некорректный входной файл");
+                        return null;
+                    }
+                }
             }
         }
         return persons;
