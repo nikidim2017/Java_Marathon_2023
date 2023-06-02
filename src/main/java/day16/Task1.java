@@ -2,8 +2,6 @@ package day16;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Task1 {
@@ -23,17 +21,14 @@ public class Task1 {
             int[] numbers = new int[20];
             int i = 0;
             int sum = 0;
-            double average = 0;
+            double average;
             while (i < stringNumbers.length) {
                 numbers[i] = Integer.parseInt(stringNumbers[i].replaceAll("[^-]\\D", ""));
                 sum += numbers[i];
                 i++;
             }
-
             average = (double) sum / stringNumbers.length;
-
             System.out.printf(average + " --> " + "%.3f", average);
-
 
         } catch (
                 FileNotFoundException ex) {

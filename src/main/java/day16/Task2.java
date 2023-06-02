@@ -29,7 +29,7 @@ public class Task2 {
             String line = sc.nextLine();
             String[] string = line.split(" ");
 
-            double numFile2 = 0;
+            double numFile2;
             double average = 0;
             int numPortion = 20;
 
